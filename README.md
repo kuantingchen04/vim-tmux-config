@@ -1,4 +1,7 @@
-# vim-tmux-config
+## vim-tmux-config
+### My settings of vimrc and tmux.conf (both placed at root `~`)
+
+#### _vimrc_
 
 1. Install bundle
 2. .vimrc call :PluginInstall
@@ -12,3 +15,5 @@
 * Build YCM (https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64)
 
 (3. mac) compile latest macvim for YCM (document)
+
+#### _tmux.conf_
