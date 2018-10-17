@@ -80,12 +80,13 @@ nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 
 
-" Using the clipboard as the default register (for mac, not linux)
-set mouse+=a
-set clipboard=unnamed
-map <F9> :.w !pbcopy<CR><CR>
-map <F10> :r !pbpaste<CR>
-"
+"--------------------------------------------------------------------------------
+" Using the clipboard as the default register (For OSX only, not Linux)
+"set mouse+=a
+"set clipboard=unnamed
+"map <F9> :.w !pbcopy<CR><CR>
+"map <F10> :r !pbpaste<CR>
+"--------------------------------------------------------------------------------
 
 "" Colorscheme
 colorscheme gruvbox
@@ -131,5 +132,5 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_working_path_mode = 2
 
 " shortcut of certain strings
-map ,s o--------------------------------------------------------------------------------<ESC>
+map ,. o--------------------------------------------------------------------------------<ESC>
 map ,r o'''<ESC>
