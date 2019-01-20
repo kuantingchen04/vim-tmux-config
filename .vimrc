@@ -1,3 +1,7 @@
+"====================================================================
+" Start vundle
+"====================================================================
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -10,30 +14,21 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"""Plugin 'L9'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"""""Plugin 'file:///home/gmarik/path/to/plugin'
-
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-"""Plugin 'ascenator/L9', {'name': 'newL9'}
-
+"====================================================================
 " Personal plugins
+"====================================================================
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
+Plugin 'Yggdroot/indentLine'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/rainbow_parentheses.vim'
+
+Plugin 'vim-scripts/taglist.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'chazy/cscope_maps'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -50,27 +45,36 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-
-""" Personal plugin settings
+"====================================================================
+" Plugin Settings
+"====================================================================
 
 " Basic settings
 syntax on
 set nu
-set expandtab
+set cursorline
+
+" Tab/Indent
 set tabstop=4
+set softtabstop=4
+set expandtab
 set backspace=2
+
+set shiftwidth=4 "Intend char
+let g:indentLine_color_term = 239
+let g:indentLine_char = '¦'
+
+" Search
 set incsearch
 set hlsearch
 set ignorecase
-set cursorline
-set background=dark
-" move vertically by visual line
+
 " Enter command mode by typing semicolon
 nnoremap ; :
+
+" Move by line on the screen rather than by line in the file
 nnoremap j gj
 nnoremap k gk
-map <F2> :set nu!<CR>
-set pastetoggle=<F3>
 
 " Tabs
 nnoremap tn :tabnew<Space>
@@ -79,37 +83,15 @@ nnoremap tj :tabprev<CR>
 nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 
-
-"--------------------------------------------------------------------------------
-" Using the clipboard as the default register (For OSX only, not Linux)
-"set mouse+=a
-"set clipboard=unnamed
-"map <F9> :.w !pbcopy<CR><CR>
-"map <F10> :r !pbpaste<CR>
-"--------------------------------------------------------------------------------
-
-"" Colorscheme
+"" Colorscheme & Background
+set background=dark
 colorscheme gruvbox
-"colorscheme candyman
-"colorscheme wombat256i
-"colorscheme monokain
 
 "" Rainbow Prarentheses
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-
-"" Nerdtree
-"execute pathogen#infect()
-map <F4> :NERDTreeToggle<CR>
-
-"" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_python_binary_path = '/usr/bin/python2.7'
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 
 "" CtrlP
 let g:ctrlp_match_window = 'bottom,order:ttb'
@@ -131,6 +113,34 @@ let g:ctrlp_custom_ignore = {
 " search the nearest ancestor that contains .git, .hg, .svn
 let g:ctrlp_working_path_mode = 2
 
+" YCM
+let g:loaded_youcompleteme = 0
+let g:ycm_server_python_interpreter='/usr/bin/python'
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py' 
+"Use default: cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
+
+
 " shortcut of certain strings
-map ,. o--------------------------------------------------------------------------------<ESC>
-map ,r o'''<ESC>
+nmap ,. o--------------------------------------------------------------------------------<ESC>
+nmap ,r o'''<ESC>
+
+"====================================================================
+" HotKeys
+"====================================================================
+noremap <F2> :set nu!<CR>
+
+set pastetoggle=<F3>
+
+noremap <F4> :TlistToggle<CR>
+
+noremap <F12> :NERDTreeToggle<CR>
+let g:NERDTreeWinPos = "right"
+
+"--------------------------------------------------------------------------------
+" Using the clipboard as the default register (For OSX only, not Linux)
+"set mouse+=a
+"set clipboard=unnamed
+"map <F9> :.w !pbcopy<CR><CR>
+"map <F10> :r !pbpaste<CR>
+"--------------------------------------------------------------------------------
+
