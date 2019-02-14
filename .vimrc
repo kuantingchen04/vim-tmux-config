@@ -114,10 +114,12 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_working_path_mode = 2
 
 " YCM
-let g:loaded_youcompleteme = 0
+"You can use default: cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
+"To not load YCM, uncomment the following line
+"let g:loaded_youcompleteme = 1
 let g:ycm_server_python_interpreter='/usr/bin/python'
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py' 
-"Use default: cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
+
 
 
 " shortcut of certain strings
