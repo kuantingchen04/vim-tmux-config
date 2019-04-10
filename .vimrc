@@ -91,6 +91,24 @@ nnoremap tl :tablast<CR>
 set background=dark
 colorscheme gruvbox
 
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
 "" Rainbow Prarentheses
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
@@ -144,7 +162,6 @@ noremap <F4> :NERDTreeToggle<CR>
 "
 "noremap <F4> :TlistToggle<CR>
 noremap <F12> :TagbarToggle<CR>
-
 
 "--------------------------------------------------------------------------------
 " Using the clipboard as the default register (For OSX only, not Linux)
