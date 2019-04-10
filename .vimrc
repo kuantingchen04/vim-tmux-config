@@ -24,11 +24,15 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'kien/rainbow_parentheses.vim'
 
-Plugin 'vim-scripts/taglist.vim'
+"Plugin 'vim-scripts/taglist.vim'
+Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'chazy/cscope_maps'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -112,14 +116,16 @@ let g:ctrlp_custom_ignore = {
   \ }
 " search the nearest ancestor that contains .git, .hg, .svn
 let g:ctrlp_working_path_mode = 2
+" For large projects
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
 
 " YCM
-"You can use default: cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
-"To not load YCM, uncomment the following line
+"You can use default config file: cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
+"To disable YCM, uncomment the following line
 "let g:loaded_youcompleteme = 1
 let g:ycm_server_python_interpreter='/usr/bin/python'
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py' 
-
 
 
 " shortcut of certain strings
@@ -133,10 +139,12 @@ noremap <F2> :set nu!<CR>
 
 set pastetoggle=<F3>
 
-noremap <F4> :TlistToggle<CR>
+noremap <F4> :NERDTreeToggle<CR>
+"let g:NERDTreeWinPos = "right"
+"
+"noremap <F4> :TlistToggle<CR>
+noremap <F12> :TagbarToggle<CR>
 
-noremap <F12> :NERDTreeToggle<CR>
-let g:NERDTreeWinPos = "right"
 
 "--------------------------------------------------------------------------------
 " Using the clipboard as the default register (For OSX only, not Linux)
