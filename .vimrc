@@ -39,6 +39,7 @@ nnoremap tl :tablast<CR>
 
 "====================================================================
 " Personal plugins (Vim-Plug)
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 "====================================================================
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
@@ -50,7 +51,7 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'aceofall/gtags.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'chazy/cscope_maps'
+"Plug 'chazy/cscope_maps'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'liuchengxu/vista.vim'
