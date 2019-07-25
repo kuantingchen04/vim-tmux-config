@@ -27,8 +27,7 @@ nnoremap ; :
 
 " Move by line on the screen rather than by line in the file
 nnoremap j gj
-nnoremap k gk
-
+nnoremap k gk 
 " Tabs
 nnoremap tn :tabnew<Space>
 nnoremap tk :tabnext<CR>
@@ -124,7 +123,7 @@ let Gtags_Auto_Update = 1
 let Gtags_Auto_Map = 1
 
 "tagbar
-let g:tagbar_ctags_bin='/usr/local/bin/gtags'
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 "let g:tagbar_ctags_bin='ctags'
 
 " CtrlP
