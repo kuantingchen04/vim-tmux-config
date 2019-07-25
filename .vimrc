@@ -1,59 +1,8 @@
 "====================================================================
-" Start vundle
+" Vim settings
 "====================================================================
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-"====================================================================
-" Personal plugins
-"====================================================================
-
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-airline/vim-airline'
-Plugin 'Yggdroot/indentLine'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'kien/rainbow_parentheses.vim'
-
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/nerdtree'
-Plugin 'chazy/cscope_maps'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'w0rp/ale'
-
-
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-"====================================================================
-" Plugin Settings
-"====================================================================
-
-" Basic settings
 syntax on
 set nu
 set cursorline
@@ -87,6 +36,46 @@ nnoremap tj :tabprev<CR>
 nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 
+
+"====================================================================
+" Personal plugins (Vim-Plug)
+"====================================================================
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'Yggdroot/indentLine'
+Plug 'flazz/vim-colorschemes'
+Plug 'kien/rainbow_parentheses.vim'
+
+Plug 'majutsushi/tagbar'
+Plug 'aceofall/gtags.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'chazy/cscope_maps'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'liuchengxu/vista.vim'
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'w0rp/ale'
+call plug#end()
+
+
+" All of your Plugins must be added before the following line
+"call plug#end()             " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PlugList       - lists configured plugins
+" :PlugInstall    - installs plugins; append `!` to update or just :PlugUpdate
+" :PlugSearch foo - searches for foo; append `!` to refresh local cache
+" :PlugClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+
+"====================================================================
+" Plugin Settings
+"====================================================================
+
 "" Colorscheme & Background
 set background=dark
 colorscheme gruvbox
@@ -109,16 +98,35 @@ let g:rbpt_colorpairs = [
     \ ['darkred',     'DarkOrchid3'],
     \ ['red',         'firebrick3'],
     \ ]
-
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
-
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-"" CtrlP
+" YCM
+"You can use default config file: cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
+"To disable YCM, uncomment the following line
+"let g:loaded_youcompleteme = 1
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_server_python_interpreter='/usr/bin/python'
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py' 
+
+"ctags
+"set tags+=./tags
+
+" gtags
+set cscopetag
+set cscopeprg=’gtags-cscope’
+let Gtags_Auto_Update = 1
+let Gtags_Auto_Map = 1
+
+"tagbar
+let g:tagbar_ctags_bin='/usr/local/bin/gtags'
+"let g:tagbar_ctags_bin='ctags'
+
+" CtrlP
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
@@ -141,17 +149,6 @@ let g:ctrlp_working_path_mode = 2
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 
-" YCM
-"You can use default config file: cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
-"To disable YCM, uncomment the following line
-"let g:loaded_youcompleteme = 1
-let g:ycm_server_python_interpreter='/usr/bin/python'
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py' 
-
-
-" shortcut of certain strings
-nmap ,. o--------------------------------------------------------------------------------<ESC>
-nmap ,r o'''<ESC>
 
 "====================================================================
 " HotKeys
@@ -174,3 +171,9 @@ noremap <F12> :TagbarToggle<CR>
 "map <F10> :r !pbpaste<CR>
 "--------------------------------------------------------------------------------
 
+" shortcut of certain strings
+nmap ,. o----------------------------------------------------------------------<ESC>
+nmap ,r o'''<ESC>
+nmap ,k A  // @kev 
+nmap ,/ A  // 
+nmap ,t A  // TODO(@kev)
