@@ -27,7 +27,8 @@ nnoremap ; :
 
 " Move by line on the screen rather than by line in the file
 nnoremap j gj
-nnoremap k gk 
+nnoremap k gk
+
 " Tabs
 nnoremap tn :tabnew<Space>
 nnoremap tk :tabnext<CR>
@@ -118,15 +119,22 @@ let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 
 " gtags
 set cscopetag
-set cscopeprg=’gtags-cscope’
+set cscopeprg='gtags-cscope' " Replace cscope
 let Gtags_Auto_Update = 1
 let Gtags_Auto_Map = 1
+let GtagsCscope_Auto_Load = 1
+let CtagsCscope_Auto_Map = 1
+let GtagsCscope_Quiet = 1
+
 
 "tagbar
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'
-"let g:tagbar_ctags_bin='ctags'
+let g:tagbar_ctags_bin='ctags'
+
+" NERDTree
+"let g:NERDTreeWinPos = "right"
 
 " CtrlP
+let g:ctrlp_map = '<c-f>'
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
@@ -153,14 +161,9 @@ let g:ctrlp_max_depth=40
 "====================================================================
 " HotKeys
 "====================================================================
-noremap <F2> :set nu!<CR>
-
+noremap <c-c> :set nu!<CR>
 set pastetoggle=<F3>
-
-noremap <F4> :NERDTreeToggle<CR>
-"let g:NERDTreeWinPos = "right"
-"
-"noremap <F4> :TlistToggle<CR>
+noremap <F9> :NERDTreeToggle<CR>
 noremap <F12> :TagbarToggle<CR>
 
 "--------------------------------------------------------------------------------
@@ -176,4 +179,4 @@ nmap ,. o----------------------------------------------------------------------<
 nmap ,r o'''<ESC>
 nmap ,k A  // @kev 
 nmap ,/ A  // 
-nmap ,t A  // TODO(@kev)
+nmap ,t A  // TODO(@kev) 
