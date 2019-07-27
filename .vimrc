@@ -134,7 +134,7 @@ let g:tagbar_ctags_bin='ctags'
 "let g:NERDTreeWinPos = "right"
 
 " CtrlP
-let g:ctrlp_map = '<c-f>'
+let g:ctrlp_map = '<c-g>'
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
