@@ -49,15 +49,13 @@ Plug 'flazz/vim-colorschemes'
 Plug 'kien/rainbow_parentheses.vim'
 
 Plug 'majutsushi/tagbar'
-Plug 'aceofall/gtags.vim'
 Plug 'scrooloose/nerdtree'
-"Plug 'chazy/cscope_maps'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'liuchengxu/vista.vim'
 "Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-"Plug 'Valloric/YouCompleteMe'
-"Plug 'w0rp/ale'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'dense-analysis/ale'
 call plug#end()
 
 
@@ -111,24 +109,25 @@ au Syntax * RainbowParenthesesLoadBraces
 "To disable YCM, uncomment the following line
 "let g:loaded_youcompleteme = 1
 let g:ycm_show_diagnostics_ui = 0
-let g:ycm_server_python_interpreter='/usr/bin/python'
+let g:ycm_server_python_interpreter='/usr/bin/python3'
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py' 
 
 "ctags
 set tags+=./tags
-
-" gtags
+" Cscsope 
 set cscopetag
-set cscopeprg='gtags-cscope' " Replace cscope
-let Gtags_Auto_Update = 1
-let Gtags_Auto_Map = 1
+set cscopeprg=gtags-cscope " Replace cscope
+" Gtags
+let Gtags_Auto_Update = 1 "keep tag files up-to-date automatically
+let Gtags_Auto_Map = 1 "use a suggested key-mapping
+" Gtags-Cscope
 let GtagsCscope_Auto_Load = 1
-let CtagsCscope_Auto_Map = 1
+let GtagsCscope_Auto_Map = 1
 let GtagsCscope_Quiet = 1
-
 
 "tagbar
 let g:tagbar_ctags_bin='ctags'
+let g:tagbar_sort = 0
 
 " NERDTree
 "let g:NERDTreeWinPos = "right"
@@ -144,7 +143,7 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*/log/*,*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 " CtrlP ignore patterns
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
