@@ -112,6 +112,9 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_server_python_interpreter='/usr/bin/python3'
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py' 
 
+" ALE: use :ALEToggle to open
+let g:ale_enabled = 0
+
 "ctags
 set tags+=./tags
 " Cscsope 
