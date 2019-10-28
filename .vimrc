@@ -138,27 +138,22 @@ let g:tagbar_sort = 0
 " CtrlP
 let g:ctrlp_map = '<c-g>'
 let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-"let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-" switch default
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<c-t>'],
-    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-    \ }
-set wildignore+=*/log/*,*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+endif
+set wildignore+=*/log/*,*/tmp/*,*.so,*.swp,*.zip,*.csv     " MacOSX/Linux
+
 " CtrlP ignore patterns
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
 " search the nearest ancestor that contains .git, .hg, .svn
-let g:ctrlp_working_path_mode = 2
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
 " For large projects
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
-
 
 "====================================================================
 " HotKeys
