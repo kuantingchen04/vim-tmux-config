@@ -6,6 +6,7 @@ filetype off                  " required
 syntax on
 set nu
 set cursorline
+set updatetime=500
 
 " Tab/Indent
 set tabstop=4
@@ -14,8 +15,6 @@ set expandtab
 set backspace=2
 
 set shiftwidth=4 "Intend char
-let g:indentLine_color_term = 239
-let g:indentLine_char = '¦'
 
 " Search
 set incsearch
@@ -44,11 +43,11 @@ nnoremap tl :tablast<CR>
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-Plug 'Yggdroot/indentLine'
 Plug 'flazz/vim-colorschemes'
 Plug 'kien/rainbow_parentheses.vim'
 
 Plug 'majutsushi/tagbar'
+"Plug 'Yggdroot/LeaderF'
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -107,10 +106,16 @@ au Syntax * RainbowParenthesesLoadBraces
 " YCM
 "You can use default config file: cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
 "To disable YCM, uncomment the following line
-"let g:loaded_youcompleteme = 1
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_server_python_interpreter='/usr/bin/python3'
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py' 
+"let g:ycm_server_python_interpreter='/usr/bin/python3'
+let g:loaded_youcompleteme = 0
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_echo_current_diagnostic = 0
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_open_loclist_on_ycm_diags = 0
 
 " ALE: use :ALEToggle to open
 let g:ale_enabled = 0
@@ -130,7 +135,7 @@ let GtagsCscope_Quiet = 1
 
 "tagbar
 let g:tagbar_ctags_bin='ctags'
-let g:tagbar_sort = 0
+"let g:tagbar_sort = 0
 
 " NERDTree
 "let g:NERDTreeWinPos = "right"
