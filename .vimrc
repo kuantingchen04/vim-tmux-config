@@ -1,25 +1,39 @@
 "====================================================================
-" Vim settings
+" General settings
 "====================================================================
+let mapleader = ","           " define <leader>
 set nocompatible              " be iMproved, required
-filetype off                  " required
+filetype on                   " detect filetype
 syntax on
-set nu
+set number
 set cursorline
 set updatetime=500
 
+"====================================================================
 " Tab/Indent
+"====================================================================
+set autoindent
+set expandtab
 set tabstop=4
 set softtabstop=4
-set expandtab
+set shiftwidth=4
 set backspace=2
 
-set shiftwidth=4 "Intend char
-
+"====================================================================
 " Search
+"====================================================================
 set incsearch
 set hlsearch
 set ignorecase
+
+"====================================================================
+" Buffer
+"====================================================================
+set nobackup
+set noswapfile
+set nobackup
+set autoread
+set confirm
 
 " Enter command mode by typing semicolon
 nnoremap ; :
@@ -27,14 +41,6 @@ nnoremap ; :
 " Move by line on the screen rather than by line in the file
 nnoremap j gj
 nnoremap k gk
-
-" Tabs
-nnoremap tn :tabnew<Space>
-nnoremap tk :tabnext<CR>
-nnoremap tj :tabprev<CR>
-nnoremap th :tabfirst<CR>
-nnoremap tl :tablast<CR>
-
 
 "====================================================================
 " Personal plugins (Vim-Plug)
@@ -46,15 +52,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
 Plug 'kien/rainbow_parentheses.vim'
 
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'majutsushi/tagbar'
-"Plug 'Yggdroot/LeaderF'
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
-"Plug 'liuchengxu/vista.vim'
-"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'ycm-core/YouCompleteMe'
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 call plug#end()
 
 
@@ -103,19 +106,39 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-" YCM
+"" YCM
 "You can use default config file: cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
 "To disable YCM, uncomment the following line
-"let g:ycm_server_python_interpreter='/usr/bin/python3'
-let g:loaded_youcompleteme = 0
+"let g:loaded_youcompleteme = 0
+
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_echo_current_diagnostic = 0
-let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_global_ycm_extra_conf="~/.vim/plugged/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py"
+"let g:ycm_server_python_interpreter='/usr/bin/python3'
+let g:ycm_show_diagnostics_ui = 0
+set completeopt=menu,menuone
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_key_list_select_completion = ['<C-n>', '<C-j>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<C-k>']
 let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_open_loclist_on_ycm_diags = 0
+let g:ycm_echo_current_diagnostic = 0
+let g:ycm_filetype_blacklist = {
+        \ 'tagbar' : 1,
+        \ 'qf' : 1,
+        \ 'notes' : 1,
+        \ 'markdown' : 1,
+        \ 'unite' : 1,
+        \ 'text' : 1,
+        \ 'vimwiki' : 1,
+        \ 'pandoc' : 1,
+        \ 'infolog' : 1,
+        \ 'mail' : 1
+        \}
+let g:ycm_disable_for_files_larger_than_kb = 50000
 
 " ALE: use :ALEToggle to open
 let g:ale_enabled = 0
@@ -134,39 +157,33 @@ let GtagsCscope_Auto_Map = 1
 let GtagsCscope_Quiet = 1
 
 "tagbar
+noremap <F12> :TagbarToggle<CR>
+let g:tagbar_width = 30
 let g:tagbar_ctags_bin='ctags'
-"let g:tagbar_sort = 0
+let g:tagbar_sort = 0
+
+"Leaderf
+let g:Lf_GtagsAutoGenerate = 1
+let g:Lf_Gtagslabel = 'native-pygments'
+noremap <leader>p :LeaderfFile<cr>
+noremap <leader>f :LeaderfFunction!<cr>
+noremap <leader>b :LeaderfBuffer<cr>
+noremap <leader>t :LeaderfTag<cr>
+
+let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.csv','*/log/*','*/tmp/*']
+            \}
+"let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 
 " NERDTree
+nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 "let g:NERDTreeWinPos = "right"
-
-" CtrlP
-let g:ctrlp_map = '<c-g>'
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-endif
-set wildignore+=*/log/*,*/tmp/*,*.so,*.swp,*.zip,*.csv     " MacOSX/Linux
-
-" CtrlP ignore patterns
-" search the nearest ancestor that contains .git, .hg, .svn
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-" For large projects
-let g:ctrlp_max_files=0
-let g:ctrlp_max_depth=40
 
 "====================================================================
 " HotKeys
 "====================================================================
-noremap <c-c> :set nu!<CR>
-set pastetoggle=<F3>
-noremap <F9> :NERDTreeToggle<CR>
-noremap <F12> :TagbarToggle<CR>
+"set pastetoggle=<F3>
 
 "--------------------------------------------------------------------------------
 " Using the clipboard as the default register (For OSX only, not Linux)
@@ -177,8 +194,7 @@ noremap <F12> :TagbarToggle<CR>
 "--------------------------------------------------------------------------------
 
 " shortcut of certain strings
-nmap ,. o----------------------------------------------------------------------<ESC>
-nmap ,r o'''<ESC>
-nmap ,k A  // @kev 
-nmap ,/ A  // 
-nmap ,t A  // TODO(@kev) 
+nnoremap <leader>h o//==============================================================================<ESC>
+nnoremap <leader>/ A  // 
+nnoremap <leader>c A  // @kev 
+nnoremap <leader>k A  // TODO(@kev) 
