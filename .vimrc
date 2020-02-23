@@ -54,6 +54,7 @@ Plug 'kien/rainbow_parentheses.vim'
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'majutsushi/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/nerdtree'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ycm-core/YouCompleteMe'
@@ -161,6 +162,15 @@ noremap <F12> :TagbarToggle<CR>
 let g:tagbar_width = 30
 let g:tagbar_ctags_bin='ctags'
 let g:tagbar_sort = 0
+
+"gutentags
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+let g:gutentags_ctags_tagfile = '.tags'
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
 
 "Leaderf
 let g:Lf_GtagsAutoGenerate = 1
