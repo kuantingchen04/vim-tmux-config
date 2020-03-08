@@ -180,9 +180,12 @@ noremap <leader>f :LeaderfFunction!<cr>
 noremap <leader>b :LeaderfBuffer<cr>
 noremap <leader>t :LeaderfTag<cr>
 
+let g:Lf_UseVersionControlTool = 0
 let g:Lf_WildIgnore = {
-            \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
-            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.csv','*/log/*','*/tmp/*']
+            \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh','.idea','__pycache__','.DS_Store','build','log'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.dll','*.py[co]','*.txt','*.csv','*.bin',
+            \ '*.jpg','*.png','*.gif','*.db','*.tgz','*.tar.gz','*.gz','*.zip','*.pptx','*.xlsx','*.docx',
+            \ '*.pdf','*.tmp','*.wmv','*.mkv','*.mp4','*.rmvb']
             \}
 "let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 
