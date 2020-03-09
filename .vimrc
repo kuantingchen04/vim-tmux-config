@@ -49,6 +49,7 @@ nnoremap k gk
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
 Plug 'flazz/vim-colorschemes'
 Plug 'kien/rainbow_parentheses.vim'
 
@@ -58,6 +59,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/nerdtree'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'ycm-core/YouCompleteMe'
+Plug 'scrooloose/nerdcommenter'
 "Plug 'dense-analysis/ale'
 call plug#end()
 
@@ -209,5 +211,5 @@ nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 " shortcut of certain strings
 nnoremap <leader>h o//==============================================================================<ESC>
 nnoremap <leader>/ A  // 
-nnoremap <leader>c A  // @kev 
-nnoremap <leader>k A  // TODO(@kev) 
+nnoremap <leader>@ A  // @kev
+nnoremap <leader>do A  // TODO(@kev)
