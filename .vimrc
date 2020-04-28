@@ -82,7 +82,7 @@ filetype plugin indent on    " required
 
 "" Colorscheme & Background
 set background=dark
-colorscheme gruvbox
+colorscheme apprentice
 
 "" Rainbow Prarentheses
 let g:rbpt_colorpairs = [
