@@ -82,7 +82,9 @@ filetype plugin indent on    " required
 
 "" Colorscheme & Background
 set background=dark
-colorscheme apprentice
+"colorscheme apprentice
+let g:solarized_termcolors=256
+colorscheme solarized
 
 "" Rainbow Prarentheses
 let g:rbpt_colorpairs = [
