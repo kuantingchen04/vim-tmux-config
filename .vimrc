@@ -6,6 +6,7 @@ set nocompatible              " be iMproved, required
 filetype on                   " detect filetype
 syntax on
 set number
+set relativenumber
 set cursorline
 set updatetime=500
 
