@@ -184,7 +184,7 @@ noremap <leader>p :LeaderfFile<cr>
 noremap <leader>f :LeaderfFunction!<cr>
 noremap <leader>b :LeaderfBuffer<cr>
 noremap <leader>t :LeaderfTag<cr>
-
+let g:Lf_ShowDevIcons = 0
 let g:Lf_UseVersionControlTool = 0
 let g:Lf_WildIgnore = {
             \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh','.idea','__pycache__','.DS_Store','build','log'],
