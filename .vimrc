@@ -151,10 +151,12 @@ let g:ale_enabled = 0
 
 "ctags
 set tags+=./tags
-" Cscsope 
-set cscopetag
-set cscopeprg=gtags-cscope " Replace cscope
+" Cscsope (no longer needed)
+"set cscopetag
+"set cscopeprg=gtags-cscope " Replace cscope
+
 " Gtags
+" Download and copy the gatgs.vim (cp /usr/local/share/gtags/gtags.vim $HOME/.vim/plugin)
 let Gtags_Auto_Update = 1 "keep tag files up-to-date automatically
 let Gtags_Auto_Map = 1 "use a suggested key-mapping
 " Gtags-Cscope
