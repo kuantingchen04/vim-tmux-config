@@ -1,24 +1,39 @@
 "====================================================================
 " General settings
 "====================================================================
-let mapleader = ","           " define <leader>
-set nocompatible              " be iMproved, required
-filetype on                   " detect filetype
-syntax on
+let mapleader = ","
+
+syntax enable
+filetype plugin indent on
+
 set number
 set relativenumber
 set cursorline
+set hidden
+set autoread
+set confirm
 set updatetime=500
+set signcolumn=yes
+set splitbelow
+set splitright
+set wildmenu
+set wildmode=longest:full,full
+set wildignore+=*/.git/*,*/node_modules/*,*/__pycache__/*,*/build/*
+
+" Use true color when the SSH/tmux terminal advertises normal capabilities.
+if exists('+termguicolors') && $TERM !=# 'dumb'
+  set termguicolors
+endif
 
 "====================================================================
-" Tab/Indent
+" Indentation
 "====================================================================
 set autoindent
 set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set backspace=2
+set backspace=indent,eol,start
 
 "====================================================================
 " Search
@@ -26,196 +41,123 @@ set backspace=2
 set incsearch
 set hlsearch
 set ignorecase
+set smartcase
 
 "====================================================================
-" Buffer
+" Recovery and undo
 "====================================================================
 set nobackup
-set noswapfile
-set nobackup
-set autoread
-set confirm
+set swapfile
 
-" Enter command mode by typing semicolon
-nnoremap ; :
+let s:swap_dir = expand('~/.vim/swap')
+if !isdirectory(s:swap_dir)
+  silent! call mkdir(s:swap_dir, 'p')
+endif
+execute 'set directory^=' . fnameescape(s:swap_dir . '//')
 
-" Move by line on the screen rather than by line in the file
-nnoremap j gj
-nnoremap k gk
-
-"====================================================================
-" Personal plugins (Vim-Plug)
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"====================================================================
-call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'airblade/vim-gitgutter'
-Plug 'flazz/vim-colorschemes'
-Plug 'kien/rainbow_parentheses.vim'
-
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'majutsushi/tagbar'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'scrooloose/nerdtree'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'ycm-core/YouCompleteMe'
-Plug 'scrooloose/nerdcommenter'
-"Plug 'dense-analysis/ale'
-call plug#end()
-
-
-" All of your Plugins must be added before the following line
-"call plug#end()             " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PlugList       - lists configured plugins
-" :PlugInstall    - installs plugins; append `!` to update or just :PlugUpdate
-" :PlugSearch foo - searches for foo; append `!` to refresh local cache
-" :PlugClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-
-"====================================================================
-" Plugin Settings
-"====================================================================
-
-"" Colorscheme & Background
-set background=dark
-"colorscheme apprentice
-let g:solarized_termcolors=256
-colorscheme gruvbox
-
-"" Rainbow Prarentheses
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-"" YCM
-"You can use default config file: cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
-"To disable YCM, uncomment the following line
-"let g:loaded_youcompleteme = 0
-
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf="~/.vim/plugged/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py"
-"let g:ycm_server_python_interpreter='/usr/bin/python3'
-let g:ycm_show_diagnostics_ui = 0
-set completeopt=menu,menuone
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_key_list_select_completion = ['<C-n>', '<C-j>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<C-k>']
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_echo_current_diagnostic = 0
-let g:ycm_filetype_blacklist = {
-        \ 'tagbar' : 1,
-        \ 'qf' : 1,
-        \ 'notes' : 1,
-        \ 'markdown' : 1,
-        \ 'unite' : 1,
-        \ 'text' : 1,
-        \ 'vimwiki' : 1,
-        \ 'pandoc' : 1,
-        \ 'infolog' : 1,
-        \ 'mail' : 1
-        \}
-let g:ycm_disable_for_files_larger_than_kb = 50000
-
-" ALE: use :ALEToggle to open
-let g:ale_enabled = 0
-
-"ctags
-set tags+=./tags
-" Cscsope (no longer needed)
-"set cscopetag
-"set cscopeprg=gtags-cscope " Replace cscope
-
-" Gtags
-" Download and copy the gatgs.vim (cp /usr/local/share/gtags/gtags.vim $HOME/.vim/plugin)
-let Gtags_Auto_Update = 1 "keep tag files up-to-date automatically
-let Gtags_Auto_Map = 1 "use a suggested key-mapping
-" Gtags-Cscope
-let GtagsCscope_Auto_Load = 1
-let GtagsCscope_Auto_Map = 1
-let GtagsCscope_Quiet = 1
-noremap <leader>\ :GtagsCursor<CR>
-
-"tagbar
-noremap <F12> :TagbarToggle<CR>
-let g:tagbar_width = 30
-let g:tagbar_ctags_bin='ctags'
-let g:tagbar_sort = 0
-
-"gutentags
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
-let g:gutentags_ctags_tagfile = '.tags'
-let s:vim_tags = expand('~/.cache/tags')
-let g:gutentags_cache_dir = s:vim_tags
-if !isdirectory(s:vim_tags)
-   silent! call mkdir(s:vim_tags, 'p')
+if has('persistent_undo')
+  let s:undo_dir = expand('~/.vim/undo')
+  if !isdirectory(s:undo_dir)
+    silent! call mkdir(s:undo_dir, 'p')
+  endif
+  set undofile
+  execute 'set undodir=' . fnameescape(s:undo_dir . '//')
 endif
 
-"Leaderf
-let g:Lf_GtagsAutoGenerate = 1
-let g:Lf_Gtagslabel = 'native-pygments'
-noremap <leader>p :LeaderfFile<cr>
-noremap <leader>f :LeaderfFunction!<cr>
-noremap <leader>b :LeaderfBuffer<cr>
-noremap <leader>t :LeaderfTag<cr>
-let g:Lf_ShowDevIcons = 0
-let g:Lf_UseVersionControlTool = 0
-let g:Lf_WildIgnore = {
-            \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh','.idea','__pycache__','.DS_Store','build','log'],
-            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.dll','*.py[co]','*.txt','*.csv','*.bin',
-            \ '*.jpg','*.png','*.gif','*.db','*.tgz','*.tar.gz','*.gz','*.zip','*.pptx','*.xlsx','*.docx',
-            \ '*.pdf','*.tmp','*.wmv','*.mkv','*.mp4','*.rmvb']
-            \}
-"let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
-
-" NERDTree
-nnoremap <silent> <leader>n :NERDTreeToggle<cr>
-"let g:NERDTreeWinPos = "right"
+" Move by screen line, but preserve counted j/k motions as physical lines.
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 
 "====================================================================
-" HotKeys
+" Plugins (vim-plug)
 "====================================================================
-"set pastetoggle=<F3>
+let s:plug_path = expand('~/.vim/autoload/plug.vim')
+if filereadable(s:plug_path)
+  call plug#begin('~/.vim/plugged')
 
-"--------------------------------------------------------------------------------
-" Using the clipboard as the default register (For OSX only, not Linux)
-"set mouse+=a
-"set clipboard=unnamed
-"map <F9> :.w !pbcopy<CR><CR>
-"map <F10> :r !pbpaste<CR>
-"--------------------------------------------------------------------------------
+  " Git review, status line, and file browsing.
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'vim-airline/vim-airline'
+  Plug 'preservim/nerdtree'
+  Plug 'preservim/nerdcommenter'
 
-" shortcut of certain strings
+  " Fast file/buffer search. fzf#install() supplies the fzf binary.
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+
+  " Lightweight Vim 8/9 LSP client; completion stays manual via CTRL-X CTRL-O.
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
+
+  " A single maintained colorscheme instead of a large colorscheme bundle.
+  Plug 'sainnhe/gruvbox-material'
+
+  call plug#end()
+else
+  echohl WarningMsg
+  echom 'vim-plug is not installed; see the vim-tmux-config README'
+  echohl None
+endif
+unlet s:plug_path
+
+"====================================================================
+" Colors
+"====================================================================
+set background=dark
+let g:gruvbox_material_background = 'medium'
+let g:gruvbox_material_better_performance = 1
+
+try
+  colorscheme gruvbox-material
+catch /^Vim\%((\a\+)\)\=:E185/
+  " Portable fallback for a fresh machine before :PlugInstall.
+  colorscheme desert
+endtry
+
+"====================================================================
+" File and Git navigation
+"====================================================================
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+
+nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+nnoremap <silent> <leader>N :NERDTreeFind<CR>
+nnoremap <silent> <leader>p :Files<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>gs :Git<CR>
+nnoremap <silent> <leader>gd :Gdiffsplit<CR>
+
+"====================================================================
+" LSP: semantic navigation without an automatic completion framework
+"====================================================================
+let g:lsp_signature_help_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_echo_delay = 500
+set completeopt=menuone,noinsert,noselect
+
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+
+  nmap <silent><buffer> gd <plug>(lsp-definition)
+  nmap <silent><buffer> gr <plug>(lsp-references)
+  nmap <silent><buffer> gs <plug>(lsp-document-symbol-search)
+  nmap <silent><buffer> K <plug>(lsp-hover)
+  nmap <silent><buffer> <leader>rn <plug>(lsp-rename)
+  nmap <silent><buffer> [g <plug>(lsp-previous-diagnostic)
+  nmap <silent><buffer> ]g <plug>(lsp-next-diagnostic)
+endfunction
+
+augroup lsp_install
+  autocmd!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+"====================================================================
+" Personal text helpers
+"====================================================================
 nnoremap <leader>h o//==============================================================================<ESC>
-nnoremap <leader>/ A  // 
-nnoremap <leader>@ A  // @kev
-nnoremap <leader>do A  // TODO(@kev)
+nnoremap <leader>/ A<Space><Space>//<Space>
+nnoremap <leader>@ A<Space><Space>//<Space>@kev
+nnoremap <leader>do A<Space><Space>//<Space>TODO(@kev)
